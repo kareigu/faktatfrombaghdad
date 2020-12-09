@@ -60,6 +60,12 @@ const getText = (ids) => {
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
+  client.user.setPresence({
+    activity: {
+        name: 'facts | عب الحقائق',
+    },
+    status: 'online'
+  });
 });
 
 client.on('message', msg => {
