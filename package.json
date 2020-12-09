@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "discord bot from baghdad",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mxrr/faktatfrombaghdad.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "nodemon"
