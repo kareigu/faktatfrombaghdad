@@ -4,6 +4,10 @@
 
 ![preview](img/preview.png)
 
+[Invite to your server](https://discord.com/api/oauth2/authorize?client_id=786280655239118868&permissions=2048&scope=bot)
+
+
+## Running locally
 
 `npm install`
 
