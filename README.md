@@ -14,6 +14,7 @@
 #### configure .env
 `TOKEN=<discord bot token>`  
 `GOOGLE_APPLICATION_CREDENTIALS=<relative path to your google service api configuration file>`  
+`CHANNEL_NAME=<name of the channel to restrict use into>`  
 
 ### Building docker and running image  
 
