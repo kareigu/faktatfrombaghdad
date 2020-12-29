@@ -16,7 +16,8 @@
 `GOOGLE_APPLICATION_CREDENTIALS=<relative path to your google service api configuration file>`  
 `CHANNEL_NAME=<name of the channel to restrict use into>`  
 
+Add mp3 or mp4 files into a sound directory at root.
+
 ### Building docker and running image  
 
-`docker build -t <give a name to the image>`  
-`docker run -d --name <give a name to the container> --restart unless-stopped <name given to the image>`
+`Run rebuil.sh` 
