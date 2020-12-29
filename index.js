@@ -1,4 +1,5 @@
-import { Client } from 'discord.js';
+import { Client, DMChannel } from 'discord.js';
+import fs from 'fs';
 import axios from 'axios';
 const client = new Client();
 import dotenv from 'dotenv';
@@ -18,6 +19,47 @@ const translateText = async (text) => {
 
   translations = Array.isArray(translations) ? translations : [translations];
   return translations[0];
+}
+
+const getFile = (roll = false) => {
+  let files = [];
+  const regex = RegExp('mp4$|mp3$', 'g');
+  fs.readdirSync('./sound/').forEach(file => {
+    if(regex.test(file))
+      files.push(file);
+  })
+  //console.log(files);
+
+  if(roll) {
+    const roll = Math.floor(Math.random() * files.length);
+    console.log('Rolled ' + roll)
+    return files[roll];
+  }
+  return files;
+}
+
+const endlessDispatcher = (connection, volume, msg) => {
+  const song = getFile(true);
+
+  const dispatcher = connection.play(`./sound/${song}`, { 
+    volume,
+    bitrate: 'auto',
+  })
+
+  dispatcher.on('speaking', (speaking) => {
+    if(!speaking)
+      playPrayer(msg, volume);
+  })
+
+  msg.channel.send(`تشغيل الأغنية | ${song}`);
+  return dispatcher;
+}
+
+const playPrayer = (msg, volume) => {
+  msg.member.voice.channel.join()
+            .then(connection => {
+              const dispatcher = endlessDispatcher(connection, volume, msg);
+            });
 }
 
 const getArticle = () => {
@@ -98,6 +140,54 @@ client.on('message', msg => {
         }]
       }).then(() => msg.channel.stopTyping());
     }
+
+    if (msg.content === '?prayer') {
+      if(msg.member.voice.channel) {
+        playPrayer(msg, 0.32);
+      } else
+        msg.reply('الانضمام إلى قناة');
+    }
+
+    if (msg.content === '?prayerlist') {
+      msg.channel.startTyping();
+      const regex = RegExp('mp4$|mp3$', 'g');
+      let prayers = ' \n';
+      getFile().forEach(el => {
+        prayers = `${prayers} \n ${el.replace(/.mp3$|.mp4$/g, '')}`
+      });
+      console.log(prayers);
+      msg.channel.send(prayers).then(() => msg.channel.stopTyping());
+    }
+
+    if (msg.content === '?haram') {
+      if(msg.member.voice.channel) {
+        if(msg.member.id === '128685552450011137')
+          playPrayer(msg, 5);
+      } else
+        msg.reply('الانضمام إلى قناة');
+    }
+
+    if (msg.content === '?shalom') {
+      client.voice.connections.array().forEach(el => {
+        if(el.channel.guild === msg.guild)
+          el.channel.leave();
+      })
+    }
+
+    if (msg.content === '?help') {
+      msg.channel.startTyping();
+      msg.member.createDM().then(DMChannel => {
+        DMChannel.send('اطلب الحكمة يا صديقي \n Pyydä viisautta, ystäväni', {
+          files: [{
+            attachment: `./files/The Holy Quran.pdf`,
+            name: 'The Holy Quran.pdf'
+          }]
+        });
+        msg.reply('أرسل لك رسالة مباشرة تحتوي على معلومات. \n Lähetä sinulle suora viesti.')
+        msg.channel.stopTyping();
+      })
+    }
+
   }
 });
 
