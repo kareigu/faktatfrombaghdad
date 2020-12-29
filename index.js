@@ -7,6 +7,7 @@ import GCC from '@google-cloud/translate';
 const {Translate} = GCC.v2;
 
 const TOKEN = process.env.TOKEN;
+const CHANNEL_NAME = process.env.CHANNEL_NAME;
 
 const translator = new Translate()
 
@@ -69,18 +70,34 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (msg.content === '?fakta') {
-    getArticle().then(title => {
-      console.log(title);
-      getText(title).then(fakta => {
-        console.log(fakta);
-
-        translateText(fakta)
-          .then(translation => {
-            msg.reply(`${fakta} \n ${translation}`);
-          });
+  if (msg.channel.name === CHANNEL_NAME || msg.type === 'dm') {
+    if (msg.content === '?fakta') {
+      msg.channel.startTyping();
+      getArticle().then(title => {
+        console.log(title);
+        getText(title).then(fakta => {
+          console.log(fakta);
+  
+          translateText(fakta)
+            .then(translation => {
+              msg.reply(`${fakta} \n ${translation}`);
+              msg.channel.stopTyping();
+            });
+        })
       })
-    })
+    }
+
+    if (msg.content === '?jose') {
+      msg.channel.startTyping();
+      const roll = Math.floor(Math.random() * 3) + 1;
+      console.log(roll);
+      msg.channel.send('En tunne', {
+        files: [{
+          attachment: `./img/faktatfrombaghdad${roll}.png`,
+          name: 'faktatfrombaghdad${roll}.png'
+        }]
+      }).then(() => msg.channel.stopTyping());
+    }
   }
 });
 
