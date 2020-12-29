@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . .
 
+COPY img/ ./img
+
 CMD [ "node", "index.js" ]
