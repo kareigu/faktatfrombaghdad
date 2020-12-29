@@ -6,8 +6,6 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
-
-COPY ./img/ ./img
+COPY ./ ./
 
 CMD [ "node", "index.js" ]
