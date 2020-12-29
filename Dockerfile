@@ -1,10 +1,12 @@
-FROM node:12
+FROM node:12-alpine
 
 WORKDIR /usr/src/faktatfrombaghdad
 
 COPY package*.json ./
 
-RUN npm install
+RUN apk add --no-cache ffmpeg \
+    && npm install \
+    && apk add --no-cache bash
 
 COPY ./ ./
 
