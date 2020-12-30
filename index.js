@@ -13,6 +13,9 @@ const CHANNEL_NAME = process.env.CHANNEL_NAME;
 const translator = new Translate()
 
 
+import evalCMD from './js/eval.js';
+
+
 const translateText = async (text) => {
   const target = 'fi'
   let [translations] = await translator.translate(text, target);
@@ -23,9 +26,9 @@ const translateText = async (text) => {
 
 const getFile = (roll = false) => {
   let files = [];
-  const regex = RegExp('mp4$|mp3$', 'g');
+  const regex = RegExp('Zone.Identifier$');
   fs.readdirSync('./sound/').forEach(file => {
-    if(regex.test(file))
+    if(!regex.test(file))
       files.push(file);
   })
   //console.log(files);
@@ -186,6 +189,18 @@ client.on('message', msg => {
         msg.reply('أرسل لك رسالة مباشرة تحتوي على معلومات. \n Lähetä sinulle suora viesti.')
         msg.channel.stopTyping();
       })
+    }
+      
+    if (msg.content.startsWith('?eval' || msg.author.id === '128685552450011137')) {
+        evalCMD(msg);
+    }
+      
+    if (msg.content.startsWith('?dir') || msg.author.id === '128685552450011137') {
+        const regex = RegExp('Zone.Identifier$');
+        fs.readdirSync('./sound/').forEach(file => {
+            if(!regex.test(file))
+                console.log(file)
+        })
     }
 
   }
