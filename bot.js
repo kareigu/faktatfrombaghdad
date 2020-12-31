@@ -39,7 +39,10 @@ client
   .on('commandError',(cmd, err) => client.logger.error(`Error occurred when running command ${cmd.groupID}:${cmd.memberName}`, err));
 
 client.registry
-  .registerGroup('general')
+  .registerGroups([
+    ['general', 'General commands'],
+    ['prayers', 'Several prayers']
+  ])
   .registerDefaultTypes()
   .registerDefaultGroups()
   .registerDefaultCommands({
