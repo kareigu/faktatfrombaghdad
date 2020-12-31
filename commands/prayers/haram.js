@@ -1,16 +1,17 @@
 const PrayerCommandBase = require('../../classes/PrayerCommandBase');
 
-class PrayerCommand extends PrayerCommandBase {
+class HaramCommand extends PrayerCommandBase {
   constructor(client) {
     super(client, {
-      name: 'prayer',
+      name: 'haram',
       group: 'prayers',
-      memberName: 'prayer',
-      description: 'Play a prayer | العب صلاة',
-      hidden: false
+      memberName: 'haram',
+      description: 'Play haram | لعب الحرام',
+      hidden: false,
+      ownerOnly: true
     });
 
-    this.volume = 0.32;
+    this.volume = 5;
     this.logger = client.logger;
   }
 
@@ -24,4 +25,4 @@ class PrayerCommand extends PrayerCommandBase {
   }
 }
 
-module.exports = PrayerCommand;
+module.exports = HaramCommand;
