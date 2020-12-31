@@ -3,9 +3,9 @@ const { Command } = require('discord.js-commando');
 class UnknownCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'unknown-command',
+      name: 'unknown',
       group: 'util',
-      memberName: 'unknown-command',
+      memberName: 'unknown',
       description: '',
       unknown: true,
       hidden: true

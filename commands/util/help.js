@@ -3,10 +3,9 @@ const { Command } = require('discord.js-commando');
 class HelpCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'help-command',
-      aliases: ['help'],
+      name: 'help',
       group: 'util',
-      memberName: 'help-command',
+      memberName: 'help',
       description: 'Seek help | طلب المساعدة',
     });
   }
