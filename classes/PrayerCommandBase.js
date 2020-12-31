@@ -40,7 +40,7 @@ class PrayerCommandBase extends Command {
   
     dispatcher.on('speaking', (speaking) => {
       if(!speaking)
-        playPrayer(msg, this.volume);
+        this.playPrayer(msg);
     })
   
     msg.channel.send(`تشغيل الأغنية | ${song}`);
