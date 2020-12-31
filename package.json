@@ -1,15 +1,14 @@
 {
   "name": "faktatfrombaghdad",
   "version": "1.0.0",
-  "type": "module",
   "description": "discord bot from baghdad",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mxrr/faktatfrombaghdad.git"
   },
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
-    "test": "nodemon"
+    "test": "nodemon bot.js"
   },
   "author": "mxr",
   "license": "ISC",
@@ -18,6 +17,8 @@
     "@google-cloud/translate": "^6.0.5",
     "axios": "^0.21.0",
     "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0"
+    "discord.js-commando": "git+https://github.com/discordjs/Commando.git",
+    "dotenv": "^8.2.0",
+    "winston": "^3.3.3"
   }
 }
