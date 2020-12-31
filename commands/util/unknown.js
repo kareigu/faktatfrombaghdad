@@ -10,12 +10,15 @@ class UnknownCommand extends Command {
       unknown: true,
       hidden: true
     });
+
+    this.logger = client.logger;
   }
 
   run(msg, prefix) {
-    if(msg.content === `${prefix}israel`)
-      return msg.reply('Not recognized | ليست معروفة');
-    else
+    if(msg.content === `${prefix}israel`) {
+      this.logger.info(`${msg.author.tag} (${msg.author.id}) asked about Israel`); 
+      return msg.channel.send('Not recognized | ليست معروفة')
+    } else
       return msg.reply('Unknown command | طلب مجهول');
   }
 }
