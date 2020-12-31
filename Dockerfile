@@ -10,4 +10,4 @@ RUN apk add --no-cache ffmpeg \
 
 COPY ./ ./
 
-CMD [ "node", "index.js" ]
+CMD [ "node", "bot.js" ]
