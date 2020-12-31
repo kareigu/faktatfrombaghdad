@@ -17,7 +17,7 @@ class PrayerCommandBase extends Command {
   getFile(roll = false) {
     let files = [];
     const regex = RegExp('Zone.Identifier$');
-    fs.readdirSync('./sound/').forEach(file => {
+    fs.readdirSync('./volume/sound/').forEach(file => {
       if(!regex.test(file))
         files.push(file);
     })
@@ -33,7 +33,7 @@ class PrayerCommandBase extends Command {
   endlessDispatcher(connection, msg) {
     const song = this.getFile(true);
   
-    const dispatcher = connection.play(`./sound/${song}`, { 
+    const dispatcher = connection.play(`./volume/sound/${song}`, { 
       volume: this.volume,
       bitrate: 'auto',
     })
