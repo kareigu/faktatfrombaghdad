@@ -14,9 +14,9 @@ class UnknownCommand extends Command {
 
   run(msg, prefix) {
     if(msg.content === `${prefix}israel`)
-      return msg.reply('Not recognized');
+      return msg.reply('Not recognized | ليست معروفة');
     else
-      return;
+      return msg.reply('Unknown command | طلب مجهول');
   }
 }
 
