@@ -1,0 +1,7 @@
+services:
+  bot:
+    image: mxr/faktatfrombaghdad
+    container_name: FaktatfromBaghdad
+    restart: unless-stopped
+    volumes:
+      - ./volume:/usr/src/faktatfrombaghdad/volume
