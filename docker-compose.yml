@@ -5,3 +5,4 @@ services:
     restart: unless-stopped
     volumes:
       - ./volume:/usr/src/faktatfrombaghdad/volume
+      - ./GCC:/usr/src/faktatfrombaghdad/GCC
